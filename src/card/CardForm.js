@@ -1,51 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
-import { createCard, readCard, readDeck, updateCard } from "../utils/api";
-import NavBar from "./Navbar";
+import React from "react";
+import { useParams, Link  } from "react-router-dom";
 
-function CardForm({ isEdit = false }) {
-  const history = useHistory();
-  const [card, setCard] = useState([]);
-  const [deck, setDeck] = useState({});
-  const { cardId } = useParams();
+function CardForm({ handleSubmit, card, setCard, isEdit = false }) {
   const { deckId } = useParams();
-
-  useEffect(() => {
-    async function loadDeck() {
-      const deckFromAPI = await readDeck(deckId, AbortController.signal);
-      setDeck(deckFromAPI);
-    }
-    loadDeck();
-  }, [deckId]);
-
-  useEffect(() => {
-    if (isEdit) {
-      async function loadCard() {
-        const cardFromAPI = await readCard(cardId, AbortController.signal);
-        setCard(cardFromAPI);
-      }
-      loadCard();
-    }
-  }, [cardId, isEdit]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isEdit) {
-      await updateCard({ ...card, id: cardId }, AbortController.signal);
-      history.push(`/decks/${deckId}`);
-    } else {
-      await createCard(deckId, card, AbortController.signal);
-      setCard({ front: "", back: "" });
-    }
-  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <NavBar
-        deckName={deck.name}
-        pageTitle={`${isEdit ? `Edit Card ${cardId}` : "Add Card"}`}
-      />
-      <h2>{isEdit ? "Edit" : "Add"} Card</h2>
       <label htmlFor="cardFront" className="form-label">
         Front
       </label>

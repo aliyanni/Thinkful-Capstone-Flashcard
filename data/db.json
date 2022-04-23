@@ -65,6 +65,12 @@
       "back": "Diamonds!",
       "deckId": 3,
       "id": 9
+    },
+    {
+      "front": "Translate to english: Ciao ragazzi. Grazi mille!",
+      "back": "Bye guys. Thanks a million!",
+      "deckId": 3,
+      "id": 10
     }
   ]
 }

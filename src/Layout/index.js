@@ -7,7 +7,8 @@ import CreateDeck from "../deck/CreateDeck";
 import StudyPage from "../study/StudyPage";
 import DeckInfo from "../deck/DeckInfo";
 import EditDeck from "../deck/EditDeck";
-import CardForm from "../card/CardForm";
+import EditCard from "../card/EditCard";
+import AddCard from "../card/AddCard";
 
 function Layout() {
   return (
@@ -27,10 +28,10 @@ function Layout() {
           <StudyPage />
         </Route>
         <Route path="/decks/:deckId/cards/new">
-          <CardForm />
+          <AddCard />
         </Route>
         <Route path="/decks/:deckId/cards/:cardId/edit">
-          <CardForm isEdit={true} />
+          <EditCard />
         </Route>
         <Route path="/decks/:deckId/edit">
           <EditDeck />
